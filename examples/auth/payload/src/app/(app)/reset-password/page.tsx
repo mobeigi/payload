@@ -5,11 +5,11 @@ import React from 'react'
 
 import config from '../../../payload.config'
 import { Gutter } from '../_components/Gutter'
-import { ResetPasswordForm } from './ResetPasswordForm'
 import classes from './index.module.scss'
+import { ResetPasswordForm } from './ResetPasswordForm'
 
 export default async function ResetPassword() {
-  const headers = getHeaders()
+  const headers = await getHeaders()
   const payload = await getPayloadHMR({ config })
   const { user } = await payload.auth({ headers })
 

@@ -1,19 +1,19 @@
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 
-import { Page } from '../../payload-types'
+import type { Page } from '../../payload-types'
+
 import { fetchPage } from '../_api/fetchPage'
 import { fetchPages } from '../_api/fetchPages'
 import { Gutter } from '../_components/Gutter'
 import RichText from '../_components/RichText'
-
 import classes from './index.module.scss'
 
 interface PageParams {
   params: { slug: string }
 }
 
-export const PageTemplate: React.FC<{ page: Page | null | undefined }> = ({ page }) => (
+export const PageTemplate: React.FC<{ page: null | Page | undefined }> = ({ page }) => (
   <main className={classes.page}>
     <Gutter>
       <h1>{page?.title}</h1>
@@ -23,7 +23,7 @@ export const PageTemplate: React.FC<{ page: Page | null | undefined }> = ({ page
 )
 
 export default async function Page({ params: { slug = 'home' } }: PageParams) {
-  const { isEnabled: isDraftMode } = draftMode()
+  const { isEnabled: isDraftMode } = await draftMode()
 
   const page = await fetchPage(slug, isDraftMode)
 
@@ -43,5 +43,5 @@ export async function generateStaticParams() {
           slug,
         }
       : {},
-  ) // eslint-disable-line function-paren-newline
+  )  
 }

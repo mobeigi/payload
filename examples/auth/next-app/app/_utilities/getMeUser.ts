@@ -7,11 +7,11 @@ export const getMeUser = async (args?: {
   nullUserRedirect?: string
   validUserRedirect?: string
 }): Promise<{
-  user: User
   token: string | undefined
+  user: User
 }> => {
   const { nullUserRedirect, validUserRedirect } = args || {}
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const token = cookieStore.get('payload-token')?.value
 
   const meUserReq = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/users/me`, {
@@ -35,7 +35,7 @@ export const getMeUser = async (args?: {
   }
 
   return {
-    user,
     token,
+    user,
   }
 }

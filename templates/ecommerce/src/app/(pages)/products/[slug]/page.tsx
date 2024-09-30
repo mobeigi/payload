@@ -18,7 +18,7 @@ import { generateMeta } from '../../../_utilities/generateMeta'
 export const dynamic = 'force-dynamic'
 
 export default async function Product({ params: { slug } }) {
-  const { isEnabled: isDraftMode } = draftMode()
+  const { isEnabled: isDraftMode } = await draftMode()
 
   let product: Product | null = null
 

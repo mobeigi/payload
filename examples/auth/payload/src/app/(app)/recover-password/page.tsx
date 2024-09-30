@@ -5,11 +5,11 @@ import React from 'react'
 
 import config from '../../../payload.config'
 import { Gutter } from '../_components/Gutter'
-import { RecoverPasswordForm } from './RecoverPasswordForm'
 import classes from './index.module.scss'
+import { RecoverPasswordForm } from './RecoverPasswordForm'
 
 export default async function RecoverPassword() {
-  const headers = getHeaders()
+  const headers = await getHeaders()
   const payload = await getPayloadHMR({ config })
   const { user } = await payload.auth({ headers })
 

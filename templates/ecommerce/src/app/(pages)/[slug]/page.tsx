@@ -22,7 +22,7 @@ import { generateMeta } from '../../_utilities/generateMeta'
 export const dynamic = 'force-dynamic'
 
 export default async function Page({ params: { slug = 'home' } }) {
-  const { isEnabled: isDraftMode } = draftMode()
+  const { isEnabled: isDraftMode } = await draftMode()
 
   let page: Page | null = null
 

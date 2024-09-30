@@ -26,9 +26,11 @@ export const getNextRequestI18n = async <
       ? I18nClient<TAdditionalTranslations, TAdditionalClientTranslationKeys>
       : I18nClient<ClientTranslationsObject, TAdditionalClientTranslationKeys>
 > => {
+  const cookieStore = await cookies()
+  const resolvedHeaders = await headers()
   return (await initI18n({
     config: config.i18n,
     context: 'client',
-    language: getRequestLanguage({ config, cookies: cookies(), headers: headers() }),
+    language: getRequestLanguage({ config, cookies: cookieStore, headers: resolvedHeaders }),
   })) as any
 }

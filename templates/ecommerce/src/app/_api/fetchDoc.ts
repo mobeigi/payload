@@ -36,8 +36,9 @@ export const fetchDoc = async <T>(args: {
   let token: RequestCookie | undefined
 
   if (draft) {
-    const { cookies } = await import('next/headers')
-    token = cookies().get(payloadToken)
+    const { cookies: cookiesPromise } = await import('next/headers')
+    const cookies = await cookiesPromise()
+    token = cookies.get(payloadToken)
   }
 
   const doc: T = await fetch(`${GRAPHQL_API_URL}/api/graphql`, {
